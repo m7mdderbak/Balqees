@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Balqees ❤️</title>
-    <!-- استدعاء خطوط جميلة للغة الإنجليزية -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            background: linear-gradient(-45deg, #ff9a9e, #fecfef, #ffdde1, #f48fb1);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -22,7 +25,13 @@
             text-align: center;
         }
 
-        /* ستايل القلوب والورود المتساقطة */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ستايل القلوب والورود المتساقطة في الخلفية */
         .falling-element {
             position: absolute;
             top: -10%;
@@ -37,24 +46,30 @@
             100% { transform: translateY(110vh) rotate(360deg) scale(1.5); opacity: 0; }
         }
 
-        /* تأثير الزجاج للصندوق */
+        /* تأثير الزجاج الشفاف الفخم للصندوق */
         .container {
             background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             padding: 40px 30px;
             border-radius: 25px;
             border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 50px rgba(216, 27, 96, 0.2);
             width: 90%;
             max-width: 400px;
             position: relative;
             z-index: 10;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 60px rgba(216, 27, 96, 0.3);
         }
 
         .page {
             display: none;
-            animation: fadeIn 0.6s ease-in-out;
+            animation: fadeInScale 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .page.active {
@@ -63,10 +78,11 @@
 
         .cursive-title {
             font-family: 'Dancing Script', cursive;
-            font-size: 42px;
+            font-size: 45px;
             color: #d81b60;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             margin-top: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
         }
 
         p {
@@ -74,6 +90,7 @@
             color: #444;
             margin-bottom: 25px;
             line-height: 1.5;
+            min-height: 27px; /* لحجز المساحة أثناء تأثير الكتابة */
         }
 
         .btn {
@@ -86,16 +103,28 @@
             cursor: pointer;
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s;
             margin: 10px;
             box-shadow: 0 4px 15px rgba(216, 27, 96, 0.3);
             width: 80%;
             max-width: 250px;
+            position: relative;
+            outline: none;
+        }
+
+        .btn-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(216, 27, 96, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(216, 27, 96, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(216, 27, 96, 0); }
         }
 
         .btn:hover {
-            transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 6px 20px rgba(216, 27, 96, 0.5);
+            transform: scale(1.08) translateY(-3px);
+            box-shadow: 0 8px 25px rgba(216, 27, 96, 0.6);
         }
 
         #no-btn {
@@ -104,172 +133,100 @@
             position: absolute;
             width: auto;
             padding: 12px 28px;
+            animation: none;
         }
 
         .vertical-buttons {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
-        /* تنسيق بطاقة النتيجة النهائية */
         .results-card {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
             padding: 20px;
             text-align: left;
             margin-top: 20px;
             border: 2px dashed #f48fb1;
+            box-shadow: inset 0 0 10px rgba(244, 143, 177, 0.2);
         }
 
         .results-card p {
-            margin: 10px 0;
+            margin: 12px 0;
             font-size: 16px;
             color: #333;
             border-bottom: 1px solid #f8bbd0;
             padding-bottom: 8px;
+            opacity: 0;
+            animation: slideInRight 0.5s forwards;
         }
 
-        .results-card p:last-child {
-            border-bottom: none;
-        }
+        .results-card p:nth-child(1) { animation-delay: 0.3s; }
+        .results-card p:nth-child(2) { animation-delay: 0.8s; }
+        .results-card p:nth-child(3) { animation-delay: 1.3s; }
+        .results-card p:nth-child(4) { animation-delay: 1.8s; }
+        .results-card p:nth-child(5) { animation-delay: 2.3s; border-bottom: none; }
 
         .results-card strong {
             color: #d81b60;
             display: inline-block;
-            width: 120px;
+            width: 130px;
         }
 
         .success-title {
             color: #2e7d32;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
             margin-bottom: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideInRight {
+            0% { opacity: 0; transform: translateX(-30px); }
+            100% { opacity: 1; transform: translateX(0); }
         }
     </style>
 </head>
 <body>
 
+    <div id="youtube-player" style="display: none;"></div>
+
     <div class="container">
         
-        <!-- Screen 1 -->
         <div id="page1" class="page active">
             <h1 class="cursive-title">Hey Balqees,</h1>
-            <p>I made something for you...</p>
-            <button class="btn" onclick="nextPage('page2')">Open ✨</button>
+            <p id="typewriter-text"></p>
+            <button class="btn btn-pulse" onclick="startExperience()">Open ✨</button>
         </div>
 
-        <!-- Screen 2 -->
         <div id="page2" class="page">
             <h1 class="cursive-title">Are you ready?</h1>
             <div style="position: relative; height: 120px; display: flex; justify-content: center; align-items: center;">
-                <button class="btn" style="width: auto;" onclick="nextPage('page3')">Yes</button>
+                <button class="btn btn-pulse" style="width: auto;" onclick="nextPage('page3')">Yes</button>
                 <button class="btn" id="no-btn">No</button>
             </div>
         </div>
 
-        <!-- Screen 3 -->
         <div id="page3" class="page">
             <h1 class="cursive-title" style="font-size: 36px;">How awesome are you?</h1>
             <div class="vertical-buttons">
                 <button class="btn" onclick="nextPage('page4')">10/10</button>
                 <button class="btn" onclick="nextPage('page4')">100/10</button>
-                <button class="btn" onclick="nextPage('page4')">Infinity ♾️</button>
+                <button class="btn btn-pulse" onclick="nextPage('page4')">Infinity ♾️</button>
             </div>
         </div>
 
-        <!-- Screen 4 -->
         <div id="page4" class="page">
-            <p style="font-size: 16px; color: #880e4f; font-weight: 600; margin-bottom: 5px;">One last question...</p>
-            <h1 class="cursive-title" style="font-size: 32px; margin-bottom: 25px;">Who makes me smile the most?</h1>
-            <div class="vertical-buttons">
-                <button class="btn" onclick="nextPage('page5')">Balqees</button>
-                <button class="btn" onclick="nextPage('page5')">Balqees</button>
-                <button class="btn" onclick="nextPage('page5')">Balqees</button>
-            </div>
-        </div>
-
-        <!-- Final Screen -->
-        <div id="page5" class="page">
-            <div class="success-title">
-                ✅ Verified Successfully
-            </div>
-            <div class="results-card">
-                <p><strong>Name:</strong> Balqees</p>
-                <p><strong>Rank:</strong> #1 In The Universe 🌟</p>
-                <p><strong>Special Skill:</strong> Making Me Smile 😊</p>
-                <p><strong>Danger Level:</strong> Too Adorable ⚠️</p>
-                <p><strong>Official Score:</strong> ∞ / 10 ♾️</p>
-            </div>
-        </div>
-
-    </div>
-
-    <script>
-        // --- سكربت القلوب والورود المتساقطة ---
-        function createFallingElement() {
-            const elements = ['❤️', '🌸', '✨', '💖', '🌷'];
-            const element = document.createElement('div');
-            
-            element.innerText = elements[Math.floor(Math.random() * elements.length)];
-            element.classList.add('falling-element');
-            
-            element.style.left = Math.random() * 100 + 'vw';
-            element.style.fontSize = Math.random() * 20 + 15 + 'px'; 
-            
-            const fallDuration = Math.random() * 3 + 4; 
-            element.style.animationDuration = fallDuration + 's';
-            
-            document.body.appendChild(element);
-            
-            setTimeout(() => {
-                element.remove();
-            }, fallDuration * 1000);
-        }
-
-        setInterval(createFallingElement, 400);
-
-        // --- سكربت التنقل ---
-        function nextPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            document.getElementById(pageId).classList.add('active');
-        }
-
-        // --- حركة زر "No" للهروب ---
-        const noBtn = document.getElementById('no-btn');
-        
-        function moveButton() {
-            const container = document.querySelector('.container');
-            const containerRect = container.getBoundingClientRect();
-            
-            const maxX = containerRect.width - noBtn.offsetWidth - 20; 
-            const maxY = containerRect.height - noBtn.offsetHeight - 20;
-
-            const randomX = Math.floor(Math.random() * maxX);
-            // نطاق عشوائي داخل الصندوق فقط
-            const randomY = Math.floor(Math.random() * maxY); 
-
-            noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
-        }
-
-        noBtn.addEventListener('mouseover', moveButton);
-        noBtn.addEventListener('touchstart', function(e) {
-            e.preventDefault(); 
-            moveButton();
-        });
-    </script>
-</body>
-</html>
+            <p style="font-size: 16px; color: #880e4f; font-weight: 60
+                
