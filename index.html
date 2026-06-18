@@ -31,7 +31,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* ستايل القلوب والورود المتساقطة في الخلفية */
         .falling-element {
             position: absolute;
             top: -10%;
@@ -46,7 +45,6 @@
             100% { transform: translateY(110vh) rotate(360deg) scale(1.5); opacity: 0; }
         }
 
-        /* تأثير الزجاج الشفاف الفخم للصندوق */
         .container {
             background: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(15px);
@@ -90,7 +88,7 @@
             color: #444;
             margin-bottom: 25px;
             line-height: 1.5;
-            min-height: 27px; /* لحجز المساحة أثناء تأثير الكتابة */
+            min-height: 27px; 
         }
 
         .btn {
@@ -196,11 +194,22 @@
             0% { opacity: 0; transform: translateX(-30px); }
             100% { opacity: 1; transform: translateX(0); }
         }
+        
+        /* إخفاء ذكي لمشغل يوتيوب حتى لا يمنعه المتصفح */
+        .hidden-player {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
 
-    <div id="youtube-player" style="display: none;"></div>
+    <div id="youtube-player" class="hidden-player"></div>
 
     <div class="container">
         
@@ -228,5 +237,154 @@
         </div>
 
         <div id="page4" class="page">
-            <p style="font-size: 16px; color: #880e4f; font-weight: 60
-                
+            <p style="font-size: 16px; color: #880e4f; font-weight: 600; margin-bottom: 5px;">One last question...</p>
+            <h1 class="cursive-title" style="font-size: 32px; margin-bottom: 25px;">Who makes me smile the most?</h1>
+            <div class="vertical-buttons">
+                <button class="btn btn-pulse" onclick="showFinalResult()">Balqees</button>
+                <button class="btn btn-pulse" onclick="showFinalResult()">Balqees</button>
+                <button class="btn btn-pulse" onclick="showFinalResult()">Balqees</button>
+            </div>
+        </div>
+
+        <div id="page5" class="page">
+            <div class="success-title">
+                ✅ Verified Successfully
+            </div>
+            <div class="results-card">
+                <p><strong>Name:</strong> Balqees</p>
+                <p><strong>Rank:</strong> #1 In The Universe 🌟</p>
+                <p><strong>Special Skill:</strong> Making Me Smile 😊</p>
+                <p><strong>Danger Level:</strong> Too Adorable ⚠️</p>
+                <p><strong>Official Score:</strong> ∞ / 10 ♾️</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- إعداد مشغل يوتيوب ---
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '100',
+                width: '100',
+                videoId: 'MwpMEbgC7DA', // Another Love
+                playerVars: {
+                    'playsinline': 1,
+                    'controls': 0,
+                    'autoplay': 0,
+                    'disablekb': 1
+                }
+            });
+        }
+
+        // --- تأثير الكتابة التلقائية ---
+        const textToType = "I made something special just for you...";
+        let textIndex = 0;
+        function typeWriterEffect() {
+            if (textIndex < textToType.length) {
+                document.getElementById("typewriter-text").innerHTML += textToType.charAt(textIndex);
+                textIndex++;
+                setTimeout(typeWriterEffect, 70); 
+            }
+        }
+        window.onload = typeWriterEffect;
+
+        // --- توليد القلوب والورود ---
+        function createFallingElement() {
+            const elements = ['❤️', '🌸', '✨', '💖', '🦋', '🌷'];
+            const element = document.createElement('div');
+            
+            element.innerText = elements[Math.floor(Math.random() * elements.length)];
+            element.classList.add('falling-element');
+            element.style.left = Math.random() * 100 + 'vw';
+            element.style.fontSize = Math.random() * 22 + 15 + 'px'; 
+            
+            const fallDuration = Math.random() * 3 + 4; 
+            element.style.animationDuration = fallDuration + 's';
+            
+            document.body.appendChild(element);
+            setTimeout(() => { element.remove(); }, fallDuration * 1000);
+        }
+        setInterval(createFallingElement, 350);
+
+        // --- بدء التجربة وانتقال الصفحة ---
+        function startExperience() {
+            // نضمن الانتقال للصفحة الثانية فوراً بغض النظر عن الأغنية
+            nextPage('page2');
+            
+            // محاولة تشغيل الأغنية بأمان
+            try {
+                if (player && typeof player.playVideo === 'function') {
+                    player.setVolume(50);
+                    player.playVideo();
+                }
+            } catch (error) {
+                console.log("Audio skipped due to browser policy.");
+            }
+        }
+
+        function nextPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        // --- حركة هروب الزر ---
+        const noBtn = document.getElementById('no-btn');
+        function moveButton() {
+            const container = document.querySelector('.container');
+            const containerRect = container.getBoundingClientRect();
+            
+            const maxX = containerRect.width - noBtn.offsetWidth - 20; 
+            const maxY = containerRect.height - noBtn.offsetHeight - 20;
+
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY); 
+
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', function(e) {
+            e.preventDefault(); 
+            moveButton();
+        });
+
+        // --- النتيجة النهائية والاحتفال ---
+        function showFinalResult() {
+            nextPage('page5');
+            
+            var duration = 3.5 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 3,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0, y: 0.8 },
+                    colors: ['#ff4081', '#d81b60', '#ffeb3b', '#4caf50']
+                });
+                confetti({
+                    particleCount: 3,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1, y: 0.8 },
+                    colors: ['#ff4081', '#d81b60', '#ffeb3b', '#4caf50']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+    </script>
+</body>
+</html>
