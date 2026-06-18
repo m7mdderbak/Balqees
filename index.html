@@ -195,7 +195,6 @@
             100% { opacity: 1; transform: translateX(0); }
         }
         
-        /* إخفاء ذكي لمشغل يوتيوب حتى لا يمنعه المتصفح */
         .hidden-player {
             position: absolute;
             top: -9999px;
@@ -209,16 +208,19 @@
 </head>
 <body>
 
+    <!-- مشغل يوتيوب مخفي ذكي -->
     <div id="youtube-player" class="hidden-player"></div>
 
     <div class="container">
         
+        <!-- Screen 1 -->
         <div id="page1" class="page active">
             <h1 class="cursive-title">Hey Balqees,</h1>
             <p id="typewriter-text"></p>
             <button class="btn btn-pulse" onclick="startExperience()">Open ✨</button>
         </div>
 
+        <!-- Screen 2 -->
         <div id="page2" class="page">
             <h1 class="cursive-title">Are you ready?</h1>
             <div style="position: relative; height: 120px; display: flex; justify-content: center; align-items: center;">
@@ -227,6 +229,7 @@
             </div>
         </div>
 
+        <!-- Screen 3 -->
         <div id="page3" class="page">
             <h1 class="cursive-title" style="font-size: 36px;">How awesome are you?</h1>
             <div class="vertical-buttons">
@@ -236,6 +239,7 @@
             </div>
         </div>
 
+        <!-- Screen 4 -->
         <div id="page4" class="page">
             <p style="font-size: 16px; color: #880e4f; font-weight: 600; margin-bottom: 5px;">One last question...</p>
             <h1 class="cursive-title" style="font-size: 32px; margin-bottom: 25px;">Who makes me smile the most?</h1>
@@ -246,6 +250,7 @@
             </div>
         </div>
 
+        <!-- Final Screen -->
         <div id="page5" class="page">
             <div class="success-title">
                 ✅ Verified Successfully
@@ -278,7 +283,8 @@
                     'playsinline': 1,
                     'controls': 0,
                     'autoplay': 0,
-                    'disablekb': 1
+                    'disablekb': 1,
+                    'start': 95 // هنا السحر: يبدأ البث مباشرة من الثانية 95 (دقيقة و 35 ثانية) عند مقطع "And I wanna kiss you"
                 }
             });
         }
@@ -315,17 +321,15 @@
 
         // --- بدء التجربة وانتقال الصفحة ---
         function startExperience() {
-            // نضمن الانتقال للصفحة الثانية فوراً بغض النظر عن الأغنية
             nextPage('page2');
             
-            // محاولة تشغيل الأغنية بأمان
             try {
                 if (player && typeof player.playVideo === 'function') {
-                    player.setVolume(50);
+                    player.setVolume(60); // رفع الصوت قليلاً ليكون مسموعاً وواضحاً
                     player.playVideo();
                 }
             } catch (error) {
-                console.log("Audio skipped due to browser policy.");
+                console.log("Audio failed to auto-play.");
             }
         }
 
