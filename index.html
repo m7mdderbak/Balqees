@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Bal8ees ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <title>For Balqees ❤️</title>
+    <!-- استدعاء خطوط جميلة للغة الإنجليزية -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Tajawal', sans-serif;
-            /* خلفية متدرجة رومانسية */
+            font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
             height: 100vh;
             display: flex;
@@ -19,6 +19,7 @@
             overflow: hidden;
             color: #333;
             position: relative;
+            text-align: center;
         }
 
         /* ستايل القلوب والورود المتساقطة */
@@ -32,30 +33,23 @@
         }
 
         @keyframes fall {
-            0% {
-                transform: translateY(0) rotate(0deg) scale(1);
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(110vh) rotate(360deg) scale(1.5);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(360deg) scale(1.5); opacity: 0; }
         }
 
-        /* تأثير الزجاج للصندوق لتبدو القلوب من خلفه */
+        /* تأثير الزجاج للصندوق */
         .container {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 40px 30px;
+            border-radius: 25px;
             border: 1px solid rgba(255, 255, 255, 0.8);
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            text-align: center;
             width: 90%;
-            max-width: 420px;
+            max-width: 400px;
             position: relative;
-            z-index: 10; /* ليكون فوق القلوب المتساقطة */
+            z-index: 10;
         }
 
         .page {
@@ -67,17 +61,12 @@
             display: block;
         }
 
-        h1 {
-            font-size: 26px;
-            color: #d81b60;
-            margin-bottom: 15px;
-        }
-
-        .english-title {
+        .cursive-title {
             font-family: 'Dancing Script', cursive;
-            font-size: 34px;
-            color: #c2185b;
-            margin-bottom: 20px;
+            font-size: 42px;
+            color: #d81b60;
+            margin-bottom: 10px;
+            margin-top: 0;
         }
 
         p {
@@ -95,11 +84,13 @@
             font-size: 18px;
             border-radius: 30px;
             cursor: pointer;
-            font-family: 'Tajawal', sans-serif;
-            font-weight: bold;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
             transition: transform 0.3s, box-shadow 0.3s;
             margin: 10px;
             box-shadow: 0 4px 15px rgba(216, 27, 96, 0.3);
+            width: 80%;
+            max-width: 250px;
         }
 
         .btn:hover {
@@ -111,83 +102,54 @@
             background: #9e9e9e;
             box-shadow: none;
             position: absolute;
+            width: auto;
+            padding: 12px 28px;
         }
 
-        .input-group {
-            margin-bottom: 20px;
-            text-align: right;
+        .vertical-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
 
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #c2185b;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #f8bbd0;
-            border-radius: 12px;
-            font-family: 'Tajawal', sans-serif;
-            box-sizing: border-box;
-            outline: none;
-        }
-
-        .input-group input:focus {
-            border-color: #d81b60;
-        }
-
-        .food-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .food-item {
+        /* تنسيق بطاقة النتيجة النهائية */
+        .results-card {
             background: rgba(255, 255, 255, 0.8);
-            border: 2px solid #f48fb1;
-            padding: 15px;
             border-radius: 15px;
-            cursor: pointer;
-            font-size: 20px;
-            transition: all 0.3s;
-            font-weight: bold;
-            color: #880e4f;
-        }
-
-        .food-item:hover {
-            background: #f8bbd0;
-            transform: scale(1.05);
-            border-color: #d81b60;
-        }
-
-        .img-container img {
-            width: 130px;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        /* تنسيق قائمة الحب */
-        .love-list {
+            padding: 20px;
             text-align: left;
-            list-style-type: none;
-            padding: 0;
-            margin: 0 0 25px 0;
-            direction: ltr;
+            margin-top: 20px;
+            border: 2px dashed #f48fb1;
         }
 
-        .love-list li {
-            font-size: 17px;
-            margin-bottom: 15px;
-            background: rgba(255, 192, 203, 0.4);
-            padding: 10px 15px;
-            border-radius: 10px;
-            border-left: 4px solid #d81b60;
+        .results-card p {
+            margin: 10px 0;
+            font-size: 16px;
             color: #333;
+            border-bottom: 1px solid #f8bbd0;
+            padding-bottom: 8px;
+        }
+
+        .results-card p:last-child {
+            border-bottom: none;
+        }
+
+        .results-card strong {
+            color: #d81b60;
+            display: inline-block;
+            width: 120px;
+        }
+
+        .success-title {
+            color: #2e7d32;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         @keyframes fadeIn {
@@ -200,74 +162,55 @@
 
     <div class="container">
         
+        <!-- Screen 1 -->
         <div id="page1" class="page active">
-            <div class="img-container">
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjM3MzYzMjk0Mjk4NjI4MzEzNjI1MTEyNDQyMzUyNTIzMzUyMzUyMCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/MDJ9BpzoJUpYlN8O1M/giphy.gif" alt="Cute Dog">
-            </div>
-            <h1>يا هلا بـ بلقيس 🌸</h1>
-            <p>سؤال سريع وخطير... هل تقبلين الخروج معي في موعد؟</p>
-            <div style="position: relative; height: 60px;">
-                <button class="btn" onclick="nextPage('page2')">نعم أكيد! ♥</button>
-                <button class="btn" id="no-btn">لا ✖</button>
-            </div>
+            <h1 class="cursive-title">Hey Balqees,</h1>
+            <p>I made something for you...</p>
+            <button class="btn" onclick="nextPage('page2')">Open ✨</button>
         </div>
 
+        <!-- Screen 2 -->
         <div id="page2" class="page">
-            <div class="img-container">
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcW12bWZqeXR1ZW91cW1xdHNxZHN4dDFwbTVtY2JxaXF1ZmU0bnRwayZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/11sBLVxNs7v6WA/giphy.gif" alt="Happy">
+            <h1 class="cursive-title">Are you ready?</h1>
+            <div style="position: relative; height: 120px; display: flex; justify-content: center; align-items: center;">
+                <button class="btn" style="width: auto;" onclick="nextPage('page3')">Yes</button>
+                <button class="btn" id="no-btn">No</button>
             </div>
-            <h1>لحظة.. عنجد وافقتي؟! 🥹</h1>
-            <p>كنت مجهز حالي نفسياً للرفض الصراحة، بس الحمدلله! 😅</p>
-            <button class="btn" onclick="nextPage('page3')">التالي ✨</button>
         </div>
 
+        <!-- Screen 3 -->
         <div id="page3" class="page">
-            <h2 class="english-title">Just a little reminder...</h2>
-            <p style="font-size: 16px; margin-bottom: 15px;">قبل ما نخطط للموعد، حبيت أذكرك بشوية أشياء:</p>
-            <ul class="love-list">
-                <li>✨ <strong>I love your smile</strong>, it literally brightens up my whole day.</li>
-                <li>💖 <strong>I love your vibe</strong>, being around you feels like magic.</li>
-                <li>🌸 <strong>You are truly special</strong>, and I’m the luckiest to have you.</li>
-            </ul>
-            <p>بحبك يا بلقيس ❤️</p>
-            <button class="btn" onclick="nextPage('page4')">يلا نحدد الوقت! ⏱️</button>
+            <h1 class="cursive-title" style="font-size: 36px;">How awesome are you?</h1>
+            <div class="vertical-buttons">
+                <button class="btn" onclick="nextPage('page4')">10/10</button>
+                <button class="btn" onclick="nextPage('page4')">100/10</button>
+                <button class="btn" onclick="nextPage('page4')">Infinity ♾️</button>
+            </div>
         </div>
 
+        <!-- Screen 4 -->
         <div id="page4" class="page">
-            <h1>إيمتى بتكوني فاضية؟ 📅</h1>
-            <div class="input-group">
-                <label>اختاري اليوم:</label>
-                <input type="date" id="date-picker">
+            <p style="font-size: 16px; color: #880e4f; font-weight: 600; margin-bottom: 5px;">One last question...</p>
+            <h1 class="cursive-title" style="font-size: 32px; margin-bottom: 25px;">Who makes me smile the most?</h1>
+            <div class="vertical-buttons">
+                <button class="btn" onclick="nextPage('page5')">Balqees</button>
+                <button class="btn" onclick="nextPage('page5')">Balqees</button>
+                <button class="btn" onclick="nextPage('page5')">Balqees</button>
             </div>
-            <div class="input-group">
-                <label>اختاري الوقت:</label>
-                <input type="time" id="time-picker">
-            </div>
-            <button class="btn" onclick="checkDate()">تأكيد الموعد ♥</button>
         </div>
 
+        <!-- Final Screen -->
         <div id="page5" class="page">
-            <h1>شو مشتهية تاكلي؟ 🍽️✨</h1>
-            <p>اختاري جوّك لليوم:</p>
-            <div class="food-grid">
-                <div class="food-item" onclick="nextPage('page6')">🍕 بيتزا</div>
-                <div class="food-item" onclick="nextPage('page6')">🍣 سوشي</div>
-                <div class="food-item" onclick="nextPage('page6')">🍔 برجر</div>
-                <div class="food-item" onclick="nextPage('page6')">🌮 شاورما</div>
-                <div class="food-item" onclick="nextPage('page6')">🍝 باستا</div>
-                <div class="food-item" onclick="nextPage('page6')">🥩 مشاوي</div>
+            <div class="success-title">
+                ✅ Verified Successfully
             </div>
-        </div>
-
-        <div id="page6" class="page">
-            <div class="img-container">
-                <img src="https://media.giphy.com/media/l4pTfx2qLszoacZRS/giphy.gif" alt="Excited">
+            <div class="results-card">
+                <p><strong>Name:</strong> Balqees</p>
+                <p><strong>Rank:</strong> #1 In The Universe 🌟</p>
+                <p><strong>Special Skill:</strong> Making Me Smile 😊</p>
+                <p><strong>Danger Level:</strong> Too Adorable ⚠️</p>
+                <p><strong>Official Score:</strong> ∞ / 10 ♾️</p>
             </div>
-            <h2 class="english-title" style="font-size: 28px;">It's a Date! ❤️</h2>
-            <p>اتفقنا يا بلقيس!<br>كوني جاهزة، أنا رح أمر آخدك 🚗✨</p>
-            <p style="font-size: 14px; color: #666; margin-top: 20px;">
-                ملاحظة: الناس الطبيعية بتبعت رسالة، بس أنا عملت موقع كامل عشانك.. لأنك بتستاهلي كل شي حلو 😎
-            </p>
         </div>
 
     </div>
@@ -278,30 +221,25 @@
             const elements = ['❤️', '🌸', '✨', '💖', '🌷'];
             const element = document.createElement('div');
             
-            // اختيار شكل عشوائي
             element.innerText = elements[Math.floor(Math.random() * elements.length)];
             element.classList.add('falling-element');
             
-            // تحديد حجم عشوائي وموقع عشوائي
             element.style.left = Math.random() * 100 + 'vw';
-            element.style.fontSize = Math.random() * 20 + 15 + 'px'; // من 15px إلى 35px
+            element.style.fontSize = Math.random() * 20 + 15 + 'px'; 
             
-            // مدة السقوط عشوائية لتبدو طبيعية أكثر
-            const fallDuration = Math.random() * 3 + 4; // من 4 إلى 7 ثواني
+            const fallDuration = Math.random() * 3 + 4; 
             element.style.animationDuration = fallDuration + 's';
             
             document.body.appendChild(element);
             
-            // حذف العنصر بعد انتهاء حركته لتخفيف الضغط على المتصفح
             setTimeout(() => {
                 element.remove();
             }, fallDuration * 1000);
         }
 
-        // إنشاء عنصر جديد كل 400 جزء من الثانية
         setInterval(createFallingElement, 400);
 
-        // --- سكربت التنقل والتفاعل ---
+        // --- سكربت التنقل ---
         function nextPage(pageId) {
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
@@ -309,28 +247,19 @@
             document.getElementById(pageId).classList.add('active');
         }
 
-        function checkDate() {
-            const date = document.getElementById('date-picker').value;
-            const time = document.getElementById('time-picker').value;
-            if(date && time) {
-                nextPage('page5');
-            } else {
-                alert("يا قلبي، اختاري اليوم والوقت أولاً عشان أكون جاهز 😉");
-            }
-        }
-
-        // حركة زر "لا" للهروب
+        // --- حركة زر "No" للهروب ---
         const noBtn = document.getElementById('no-btn');
         
         function moveButton() {
             const container = document.querySelector('.container');
             const containerRect = container.getBoundingClientRect();
             
-            const maxX = containerRect.width - noBtn.offsetWidth - 40; 
-            const maxY = containerRect.height - noBtn.offsetHeight - 40;
+            const maxX = containerRect.width - noBtn.offsetWidth - 20; 
+            const maxY = containerRect.height - noBtn.offsetHeight - 20;
 
             const randomX = Math.floor(Math.random() * maxX);
-            const randomY = Math.floor(Math.random() * maxY) - 50; 
+            // نطاق عشوائي داخل الصندوق فقط
+            const randomY = Math.floor(Math.random() * maxY); 
 
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
