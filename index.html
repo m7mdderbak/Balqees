@@ -60,7 +60,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* تأثير الاهتزاز عند الإجابة الخاطئة */
         .shake {
             animation: shake 0.5s ease-in-out;
         }
@@ -203,6 +202,20 @@
             display: none;
         }
 
+        /* ستايل مخصص وأنيق لمشغل الموسيقى المدمج */
+        .music-player-box {
+            margin-top: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid rgba(216, 27, 96, 0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: inline-block;
+            background: #000;
+            height: 60px;
+            width: 200px;
+            opacity: 0.8;
+        }
+
         @keyframes fadeInScale {
             0% { opacity: 0; transform: scale(0.8); }
             100% { opacity: 1; transform: scale(1); }
@@ -212,32 +225,18 @@
             0% { opacity: 0; transform: translateX(-30px); }
             100% { opacity: 1; transform: translateX(0); }
         }
-        
-        .hidden-player {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-            pointer-events: none;
-        }
     </style>
 </head>
 <body>
 
-    <div id="youtube-player" class="hidden-player"></div>
-
     <div class="container" id="main-card">
         
-        <!-- Screen 1 -->
         <div id="page1" class="page active">
             <h1 class="cursive-title">Hey Balqees,</h1>
             <p id="typewriter-text"></p>
             <button class="btn btn-pulse" onclick="startExperience()">Open ✨</button>
         </div>
 
-        <!-- Screen 2 -->
         <div id="page2" class="page">
             <h1 class="cursive-title">Are you ready?</h1>
             <div style="position: relative; height: 120px; display: flex; justify-content: center; align-items: center;">
@@ -246,7 +245,6 @@
             </div>
         </div>
 
-        <!-- Screen 3 (سؤال الانفنتي المقفل) -->
         <div id="page3" class="page">
             <h1 class="cursive-title" style="font-size: 36px;">How awesome are you?</h1>
             <div class="vertical-buttons">
@@ -257,7 +255,6 @@
             <div id="awesome-error" class="error-msg">❌ Error: Underestimation detected! Try again.</div>
         </div>
 
-        <!-- Screen New (السؤال الإضافي الذكي) -->
         <div id="page_new" class="page">
             <h1 class="cursive-title" style="font-size: 32px;">When she is mad at me, what should I do?</h1>
             <div class="vertical-buttons">
@@ -268,7 +265,6 @@
             <div id="mad-error" class="error-msg">❌ Wrong choice! That is highly dangerous.</div>
         </div>
 
-        <!-- Screen 4 -->
         <div id="page4" class="page">
             <p style="font-size: 16px; color: #880e4f; font-weight: 600; margin-bottom: 5px;">One last question...</p>
             <h1 class="cursive-title" style="font-size: 32px; margin-bottom: 25px;">Who makes me smile the most?</h1>
@@ -279,7 +275,6 @@
             </div>
         </div>
 
-        <!-- Final Screen -->
         <div id="page5" class="page">
             <div class="success-title">
                 ✅ Verified Successfully
@@ -291,6 +286,10 @@
                 <p><strong>Danger Level:</strong> Too Adorable ⚠️</p>
                 <p><strong>Official Score:</strong> ∞ / 10 ♾️</p>
             </div>
+        </div>
+
+        <div class="music-player-box">
+            <div id="youtube-player"></div>
         </div>
 
     </div>
@@ -305,8 +304,8 @@
         var player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
-                height: '100',
-                width: '100',
+                height: '60',
+                width: '200',
                 videoId: 'MwpMEbgC7DA', // Another Love
                 playerVars: {
                     'playsinline': 1,
@@ -348,14 +347,12 @@
         }
         setInterval(createFallingElement, 350);
 
-        // --- حركة التنقل وهز الشاشة الخاطئة ---
         function triggerShake() {
             const card = document.getElementById('main-card');
             card.classList.add('shake');
             setTimeout(() => card.classList.remove('shake'), 500);
         }
 
-        // --- التعامل مع الإجابات الخاطئة لسؤال الـ Awesome ---
         function handleWrongAwesome(btnId) {
             triggerShake();
             const btn = document.getElementById(btnId);
@@ -363,14 +360,12 @@
             btn.innerText = "Wrong ❌";
             document.getElementById('awesome-error').style.display = 'block';
             
-            // إعادة تعيين الزر بعد ثانيتين لتعاود المحاولة
             setTimeout(() => {
                 btn.classList.remove('btn-wrong');
                 btn.innerText = (btnId === 'opt1') ? "10/10" : "100/10";
             }, 2000);
         }
 
-        // --- التعامل مع الإجابات الخاطئة لسؤال الزعل ---
         function handleWrongMad(btnId) {
             triggerShake();
             const btn = document.getElementById(btnId);
@@ -386,13 +381,10 @@
 
         function startExperience() {
             nextPage('page2');
-            try {
-                if (player && typeof player.playVideo === 'function') {
-                    player.setVolume(60); 
-                    player.playVideo();
-                }
-            } catch (error) {
-                console.log("Audio failed to auto-play.");
+            // تشغيل إجباري آمن ومباشر للمتصفح عند النقر
+            if (player && typeof player.playVideo === 'function') {
+                player.setVolume(70); 
+                player.playVideo();
             }
         }
 
@@ -403,7 +395,6 @@
             document.getElementById(pageId).classList.add('active');
         }
 
-        // --- حركة هروب زر No ---
         const noBtn = document.getElementById('no-btn');
         function moveButton() {
             const container = document.querySelector('.container');
@@ -424,7 +415,6 @@
             moveButton();
         });
 
-        // --- النتيجة النهائية والاحتفال ---
         function showFinalResult() {
             nextPage('page5');
             
@@ -440,7 +430,7 @@
                     colors: ['#ff4081', '#d81b60', '#ffeb3b', '#4caf50']
                 });
                 confetti({
-                    particleCount: 3,
+                    boxCount: 3,
                     angle: 120,
                     spread: 55,
                     origin: { x: 1, y: 0.8 },
